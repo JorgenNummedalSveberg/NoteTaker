@@ -1,7 +1,7 @@
 import mongoose, {Document, Schema} from 'mongoose';
 
 const Character = new Schema({
-    name: {type: String, required: true, unique: false}, // Whatever name that makes the most sense to define as their "actual" name,
+    name: {type: String, required: true, unique: true}, // Whatever name that makes the most sense to define as their "actual" name,
     aliases: {type: [String], required: true, unique: false}, // Fake names, nicknames, titles, preferred naming
     description: {type: String, required: true, unique: false}, // Description of the character
     specialTraits: {type: [String], required: true, unique: false}, // Different special traits to summarize the description, how to recognize them etc

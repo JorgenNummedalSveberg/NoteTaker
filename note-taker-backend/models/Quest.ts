@@ -1,7 +1,7 @@
 import mongoose, {Document, Schema} from 'mongoose';
 
 const Quest = new Schema({
-    name: {type: String, required: true, unique: false}, // Title of quest
+    name: {type: String, required: true, unique: true}, // Title of quest
     giver: {type: String, required: true, unique: false}, // Quest giver
     takers: {type: [String], required: true, unique: false}, // Quest takers
     goldReward: {type: String, required: true, unique: false}, // Official gold reward

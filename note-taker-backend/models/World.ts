@@ -1,7 +1,7 @@
 import mongoose, {Document, Schema} from 'mongoose';
 
 const World = new Schema({
-    name: {type: String, required: true, unique: false}, // Name of the world, may just be something like "<person>'s world"
+    name: {type: String, required: true, unique: true}, // Name of the world, may just be something like "<person>'s world"
 });
 
 

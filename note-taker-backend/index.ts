@@ -26,13 +26,13 @@ mongoose
 
         app.get('/getAll', jsonParser, async (req, res, e) => {
             try {
-                const campaign = await Campaign.find();
+                const campaigns = await Campaign.find();
                 const characters = await Character.find();
                 const groups = await Group.find();
                 const items = await Item.find();
                 const quests = await Quest.find();
                 const worlds = await World.find();
-                res.status(200).send({campaign: campaign, characters: characters, groups: groups, items: items, quests: quests, worlds: worlds});
+                res.status(200).send({campaigns: campaigns, characters: characters, groups: groups, items: items, quests: quests, worlds: worlds});
             } catch {
                 res.status(400).send({message: "Couldn't get"})
             }
@@ -40,7 +40,7 @@ mongoose
 
         // Adds object to database
         app.post('/add', jsonParser, async (req, res, e) => {
-            const payload = req.body.payload;
+            const payload = req.body;
             const type = req.query.type;
             try {
                 switch (type) {
