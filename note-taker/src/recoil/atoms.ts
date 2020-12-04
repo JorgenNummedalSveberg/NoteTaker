@@ -24,3 +24,7 @@ export const worldState = atom({
     key: 'worlds',
     default: []
 })
+export const selectedCampaignState = atom({
+    key: 'selectedCampaign',
+    default: '',
+})

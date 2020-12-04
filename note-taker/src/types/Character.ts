@@ -1,4 +1,5 @@
 export interface ICharacter {
+    _id: string,
     name: string, // Whatever name that makes the most sense to define as their "actual" name
     aliases: string[], // Fake names, nicknames, titles, preferred naming
     description: string, // Description of the character
@@ -17,6 +18,7 @@ export interface ICharacter {
 
 export function newCharacter(name: string): ICharacter {
     return {
+        _id: '',
         aliases: [],
         campaigns: [],
         description: "",

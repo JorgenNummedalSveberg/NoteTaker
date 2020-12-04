@@ -1,7 +1,15 @@
 import React, {useState} from 'react';
 import {add, fetchAll} from "./worldBuildingService";
 import {useRecoilState} from "recoil";
-import {campaignState, characterState, groupState, itemState, questState, worldState} from "./recoil/atoms";
+import {
+    campaignState,
+    characterState,
+    groupState,
+    itemState,
+    questState,
+    selectedCampaignState,
+    worldState
+} from "./recoil/atoms";
 import {ICampaign, newCampaign} from "./types/Campaign";
 import {ICharacter, newCharacter} from "./types/Character";
 import {IWorld, newWorld} from "./types/World";
@@ -10,14 +18,15 @@ import {IQuest, newQuest} from "./types/Quest";
 import {IGroup, newGroup} from "./types/Group";
 
 function App() {
+    const [selectedCampaign, setSelectedCampaign] = useRecoilState(selectedCampaignState);
     const [first, setFirst] = useState(true);
-    const [worldInput, setWorldInput] = useState('')
-    const [campaigns, setCampaigns] = useRecoilState(campaignState)
-    const [characters, setCharacters] = useRecoilState(characterState)
-    const [groups, setGroups] = useRecoilState(groupState)
-    const [items, setItems] = useRecoilState(itemState)
-    const [quests, setQuests] = useRecoilState(questState)
-    const [worlds, setWorlds] = useRecoilState(worldState)
+    const [worldInput, setWorldInput] = useState('');
+    const [campaigns, setCampaigns] = useRecoilState(campaignState);
+    const [characters, setCharacters] = useRecoilState(characterState);
+    const [groups, setGroups] = useRecoilState(groupState);
+    const [items, setItems] = useRecoilState(itemState);
+    const [quests, setQuests] = useRecoilState(questState);
+    const [worlds, setWorlds] = useRecoilState(worldState);
 
     function setState(state: {campaigns:  [], characters: [], groups: [], items: [], quests: [], worlds: []}) {
         setCampaigns(state.campaigns);
@@ -32,12 +41,17 @@ function App() {
         fetchAll(setState);
         setFirst(false)
     }
+    console.log(selectedCampaign);
 
     return (
         <div>
+            <select value={selectedCampaign} onChange={(e) => setSelectedCampaign(e.target.value)}>
+                <option value={undefined}>Select campaign</option>
+                {campaigns.map((campaign: ICampaign) => <option value={campaign._id}>{campaign.name}</option>)}
+            </select>
           <ul>
               <li>
-                  {campaigns.map((campaigns: ICampaign) => campaigns.name+', ')}
+                  {campaigns.map((campaign: ICampaign) => campaign.name+', ')}
               </li>
               <li>
                   {characters.map((characters: ICharacter) => characters.name+', ')}

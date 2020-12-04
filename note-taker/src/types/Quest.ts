@@ -1,4 +1,5 @@
 export interface IQuest {
+    _id: string,
     name: string, // Title of quest
     giver: string, // Quest giver
     takers: string[], // Quest takers
@@ -14,6 +15,7 @@ export interface IQuest {
 
 export function newQuest(name: string): IQuest {
     return {
+        _id: '',
         benefits: [],
         campaign: [],
         description: "",

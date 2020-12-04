@@ -1,4 +1,5 @@
 export interface IGroup {
+    _id: string;
     name: string, // Whatever name that makes the most sense to define as their "actual" name
     aliases: string[], // Fake names, nicknames, titles, preferred naming
     description: string, // Description of the group
@@ -17,6 +18,7 @@ export interface IGroup {
 
 export function newGroup(name: string): IGroup {
     return {
+        _id: '',
         aliases: [],
         campaigns: [],
         characters: [],
