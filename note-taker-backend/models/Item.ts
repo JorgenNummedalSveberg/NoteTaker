@@ -1,4 +1,5 @@
 import mongoose, {Document, Schema} from 'mongoose';
+mongoose.Schema.Types.String.checkRequired(v => typeof v === 'string');
 
 const Item = new Schema({
     name: {type: String, required: true, unique: true}, // Name of the item
@@ -9,7 +10,7 @@ const Item = new Schema({
 
 
 export interface IItem extends Document {
-    title: string, // Name of the item
+    name: string, // Name of the item
     description: string, // Description of the item
     campaigns: string[] // Campaigns the item has appeared in
 }

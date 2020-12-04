@@ -1,4 +1,5 @@
 import mongoose, {Document, Schema} from 'mongoose';
+mongoose.Schema.Types.String.checkRequired(v => typeof v === 'string');
 
 const Group = new Schema({
     name: {type: String, required: true, unique: true}, // Whatever name that makes the most sense to define as their "actual" name

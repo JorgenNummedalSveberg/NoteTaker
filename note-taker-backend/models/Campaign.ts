@@ -1,4 +1,5 @@
 import mongoose, {Document, Schema} from 'mongoose';
+mongoose.Schema.Types.String.checkRequired(v => typeof v === 'string');
 
 const Campaign = new Schema({
     name: {type: String, required: true, unique: true}, // Name of the campaign
@@ -8,7 +9,7 @@ const Campaign = new Schema({
 
 
 export interface ICampaign extends Document {
-    title: string, // Name of the campaign
+    name: string, // Name of the campaign
     group: string, // Group that is playing the campaign
     world: string, // World the campaign takes place in
 }

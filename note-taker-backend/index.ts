@@ -32,7 +32,7 @@ mongoose
                 const items = await Item.find();
                 const quests = await Quest.find();
                 const worlds = await World.find();
-                res.status(200).send({campaigns: campaigns, characters: characters, groups: groups, items: items, quests: quests, worlds: worlds});
+                res.send({campaigns: campaigns, characters: characters, groups: groups, items: items, quests: quests, worlds: worlds});
             } catch {
                 res.status(400).send({message: "Couldn't get"})
             }
@@ -47,32 +47,32 @@ mongoose
                     case 'Campaign':
                         const campaign = new Campaign(payload);
                         await campaign.save();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     case 'Character':
                         const character = new Character(payload);
                         await character.save();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     case 'Group':
                         const group = new Group(payload);
                         await group.save();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     case 'Item':
                         const item = new Item(payload);
                         await item.save();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     case 'Quest':
                         const quest = new Quest(payload);
                         await quest.save();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     case 'World':
                         const world = new World(payload);
                         await world.save();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     default:
                         res.status(404).send({error: 'Type not supported'});
@@ -92,32 +92,32 @@ mongoose
                     case 'Campaign':
                         const campaign = await Campaign.findOne({'_id': id});
                         await campaign.delete();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     case 'Character':
                         const character = await Character.findOne({'_id': id});
                         await character.delete();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     case 'Group':
                         const group = await Group.findOne({'_id': id});
                         await group.delete();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     case 'Item':
                         const item = await Item.findOne({'_id': id});
                         await item.delete();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     case 'Quest':
                         const quest = await Quest.findOne({'_id': id});
                         await quest.delete();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     case 'World':
                         const world = await World.findOne({'_id': id});
                         await world.delete();
-                        res.status(200).send({message: 'Campaign added'});
+                        res.send({message: 'Campaign added'});
                         break;
                     default:
                         res.status(404).send({error: 'Type not supported'});

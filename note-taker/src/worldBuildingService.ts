@@ -1,4 +1,9 @@
-import IWorld from "../public/types/World";
+import {ICampaign} from "./types/Campaign";
+import {ICharacter} from "./types/Character";
+import {IWorld} from "./types/World";
+import {IItem} from "./types/Item";
+import {IQuest} from "./types/Quest";
+import {IGroup} from "./types/Group";
 
 export function fetchAll(setData: (data: {campaigns:  [], characters: [], groups: [], items: [], quests: [], worlds: []}) => void) {
 
@@ -28,15 +33,14 @@ export function fetchAll(setData: (data: {campaigns:  [], characters: [], groups
     })
 }
 
-export function addWorld(name: string) {
-    const world: IWorld = {name: 'TestWorld'+name}
+export function add(payload: ICampaign | ICharacter | IGroup | IItem | IQuest | IWorld, type: string) {
     const req = ({
         method: 'POST',
-        body: JSON.stringify(world),
+        body: JSON.stringify(payload),
         headers: {
             'Content-Type': 'application/json'
         }
     })
 
-    fetch('http://localhost:5000/add?type=World', req);
+    fetch('http://localhost:5000/add?type='+type, req);
 }
