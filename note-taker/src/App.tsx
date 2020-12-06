@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Homepage from "./homepage/Homepage";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Admintool from "./admintool/Admintool";
 import {useRecoilState} from "recoil";
 import {
@@ -9,11 +9,11 @@ import {
     groupState,
     itemState,
     questState,
-    selectedCampaignState,
     worldState
 } from "./recoil/atoms";
 import {fetchAll} from "./worldBuildingService";
 import Notehub from "./notehub/Notehub";
+import CharacterEditor from "./editors/CharacterEditor";
 
 function App() {
 
@@ -44,6 +44,11 @@ function App() {
             <Route path={'/'} exact component={Homepage}/>
             <Route path={'/admintool'} exact component={Admintool}/>
             <Route path={'/notehub'} exact component={Notehub}/>
+            <Route path={'/editor'}>
+                <Switch>
+                    <Route path={'/character'} exact component={CharacterEditor}/>
+                </Switch>
+            </Route>
         </BrowserRouter>
     );
 }

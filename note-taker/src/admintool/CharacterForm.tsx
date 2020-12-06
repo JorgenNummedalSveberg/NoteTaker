@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import {add} from "../worldBuildingService";
 import {newCharacter} from "../types/Character";
 
-export default function CharacterForm(props: {setOpen: (bool: boolean) => void}) {
+export default function CharacterForm(props: {handleClose: () => void}) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [socialStatus, setSocialStatus] = useState('');
@@ -13,7 +13,7 @@ export default function CharacterForm(props: {setOpen: (bool: boolean) => void})
 
     function handleSubmit() {
         add(newCharacter(name, description, socialStatus, wealth, campaign._id), 'Character');
-        props.setOpen(false);
+        props.handleClose();
     }
     return (
         <form>

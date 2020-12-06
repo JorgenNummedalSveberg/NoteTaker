@@ -9,10 +9,12 @@ import {CampaignCard, CharacterCard, GroupCard, ItemCard, ListCard, QuestCard, W
 import React, {useState} from "react";
 import CharacterForm from "../admintool/CharacterForm";
 import Popup from "../admintool/Popup";
+import {fetchAll} from "../worldBuildingService";
+import {useRecoilState} from "recoil";
+import {campaignState, characterState, groupState, itemState, questState, worldState} from "../recoil/atoms";
 
 const Root = styled.div`
     width: 500px;
-    height: 581px;
     background-color: white;
     border: solid black 2px;
 `;
@@ -30,7 +32,8 @@ const SearchBar = styled.div`
     height: 80px;
     display: flex;
     justify-content: center;
-    input {width: 420px; margin: 20px 0 20px 0;};
+    #searchbar {width: 420px; margin: 20px 0 20px 0;};
+    #addButton {width: 300px; margin: 20px 0 20px 0;};
 `;
 const DividerContainer = styled.div`
     width: 100%;
@@ -53,11 +56,31 @@ function Divider() {
 export default function SearchList(props: {list: (ICampaign | ICharacter | IGroup | IItem | IQuest | IWorld)[], type: string}) {
     const [input, setInput] = useState('');
     const [popup, setPopup] = useState(false);
+    const [worldInput, setWorldInput] = useState('');
+    const [campaigns, setCampaigns] = useRecoilState(campaignState);
+    const [characters, setCharacters] = useRecoilState(characterState);
+    const [groups, setGroups] = useRecoilState(groupState);
+    const [items, setItems] = useRecoilState(itemState);
+    const [quests, setQuests] = useRecoilState(questState);
+    const [worlds, setWorlds] = useRecoilState(worldState);
+
+    function setState(state: {campaigns:  [], characters: [], groups: [], items: [], quests: [], worlds: []}) {
+        setCampaigns(state.campaigns);
+        setCharacters(state.characters);
+        setGroups(state.groups);
+        setItems(state.items);
+        setQuests(state.quests);
+        setWorlds(state.worlds);
+    }
+    function handleClose() {
+        setPopup(false);
+        fetchAll(setState);
+    }
     const list = props.list.filter(element => element.name.toLowerCase().includes(input.toLowerCase()));
     return(
         <Root>
             <SearchBar>
-                <input value={input} onChange={e => setInput(e.target.value)}/>
+                <input id='searchbar' value={input} onChange={e => setInput(e.target.value)}/>
             </SearchBar>
             <Divider/>
             <List>{list.map(element => {
@@ -78,10 +101,11 @@ export default function SearchList(props: {list: (ICampaign | ICharacter | IGrou
                         return <ListCard>Unsupported type</ListCard>
                 }
             })}</List>
+            <Divider/>
             <SearchBar>
-                <button onClick={() => setPopup(true)}/>
+                <button id='addButton' onClick={() => setPopup(true)}>Add {props.type}</button>
                 {popup?(
-                    <Popup setOpen={setPopup}><CharacterForm setOpen={setPopup}/></Popup>
+                    <Popup handleClose={handleClose}><CharacterForm handleClose={handleClose}/></Popup>
                 ):null}
             </SearchBar>
         </Root>

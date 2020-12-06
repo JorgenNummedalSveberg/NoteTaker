@@ -29,10 +29,10 @@ const PopupGrid = styled.div`
     justify-content: center;
     padding: 200px;
 `;
-export default function Popup(props: {children: JSX.Element | JSX.Element[], setOpen:(bool: boolean) => void}) {
+export default function Popup(props: {children: JSX.Element | JSX.Element[], handleClose:() => void}) {
     return (
         <div>
-            <Background onClick={()=> props.setOpen(false)}></Background>
+            <Background onClick={()=> props.handleClose}></Background>
             <PopupBox>
                 <PopupGrid>
                     <Dialogue>{props.children}</Dialogue>
