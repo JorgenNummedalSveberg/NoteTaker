@@ -12,7 +12,7 @@ const Quest = new Schema({
     description: {type: String, required: true, unique: false}, // In-depth description of quest
     objective: {type: String, required: true, unique: false}, // Short summary of objective to complete
     places: {type: [String], required: true, unique: false}, // Places involved in the quest
-    campaign: {type: [String], required: true, unique: false} // Campaign the quest happened in
+    campaigns: {type: [String], required: true, unique: false} // Campaign the quest happened in
 });
 
 
@@ -27,7 +27,7 @@ export interface IQuest extends Document {
     description: string, // In-depth description of quest
     objective: string, // Short summary of objective to complete
     places: string[], // Places involved in the quest
-    campaign: string[] // Campaign the quest happened in
+    campaigns: string[] // Campaign the quest happened in
 
 }
 

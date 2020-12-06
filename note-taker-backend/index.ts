@@ -41,7 +41,10 @@ mongoose
         // Adds object to database
         app.post('/add', jsonParser, async (req, res, e) => {
             const payload = req.body;
+            delete payload._id;
             const type = req.query.type;
+            console.log(payload)
+            console.log(type)
             try {
                 switch (type) {
                     case 'Campaign':
@@ -52,6 +55,7 @@ mongoose
                     case 'Character':
                         const character = new Character(payload);
                         await character.save();
+                        console.log(character);
                         res.send({message: 'Campaign added'});
                         break;
                     case 'Group':

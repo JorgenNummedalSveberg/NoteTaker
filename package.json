@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "recoil": "^0.1.2"
+    "concurrently": "^5.3.0"
+  },
+  "scripts": {
+    "start": "concurrently --kill-others \"cd note-taker-backend && yarn run watch\" \"cd note-taker && yarn start\"",
+    "setup": "yarn install && cd note-taker-backend && yarn install && cd .. && cd note-taker && yarn install"
   }
 }

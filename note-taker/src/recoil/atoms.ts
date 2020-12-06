@@ -1,4 +1,5 @@
 import {atom} from "recoil";
+import {newCampaign} from "../types/Campaign";
 
 export const campaignState = atom({
     key: 'campaigns',
@@ -26,5 +27,5 @@ export const worldState = atom({
 })
 export const selectedCampaignState = atom({
     key: 'selectedCampaign',
-    default: '',
+    default: newCampaign('default'),
 })

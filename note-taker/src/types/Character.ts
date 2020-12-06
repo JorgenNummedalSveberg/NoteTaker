@@ -16,12 +16,12 @@ export interface ICharacter {
     questsParticipated: string[] // Quests they have themselves taken apart in
 }
 
-export function newCharacter(name: string): ICharacter {
+export function newCharacter(name: string, description: string, socialStatus: string, wealth: string, campaign: string): ICharacter {
     return {
         _id: '',
         aliases: [],
-        campaigns: [],
-        description: "",
+        campaigns: [campaign],
+        description: description,
         groups: [],
         items: [],
         name: name,
@@ -29,9 +29,9 @@ export function newCharacter(name: string): ICharacter {
         positiveStanding: [],
         questsGiven: [],
         questsParticipated: [],
-        socialStatus: "",
+        socialStatus: socialStatus,
         specialTraits: [],
         thoughtsSurrounding: [],
-        wealth: "",
+        wealth: wealth,
     }
 }

@@ -10,14 +10,14 @@ export interface IQuest {
     description: string, // In-depth description of quest
     objective: string, // Short summary of objective to complete
     places: string[], // Places involved in the quest
-    campaign: string[] // Campaign the quest happened in
+    campaigns: string[] // Campaign the quest happened in
 }
 
 export function newQuest(name: string): IQuest {
     return {
         _id: '',
         benefits: [],
-        campaign: [],
+        campaigns: [],
         description: "",
         downsides: [],
         giver: "",
