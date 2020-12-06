@@ -38,6 +38,51 @@ mongoose
             }
         })
 
+        app.put('/edit', jsonParser, async (req, res, e) => {
+            const payload = req.body;
+            const type = req.query.type;
+            const id = req.query.id;
+            try {
+                switch (type) {
+                    case 'Campaign':
+                        let campaign = await Campaign.findOneAndUpdate({'_id': id}, payload);
+                        await campaign.save();
+                        res.send({message: 'Campaign saved'});
+                        break;
+                    case 'Character':
+                        const character = await Character.findOneAndUpdate({'_id': id}, payload);
+                        await character.save();
+                        res.send({message: 'Campaign saved'});
+                        break;
+                    case 'Group':
+                        const group = await Group.findOneAndUpdate({'_id': id}, payload);
+                        await group.save();
+                        res.send({message: 'Campaign saved'});
+                        break;
+                    case 'Item':
+                        const item = await Item.findOneAndUpdate({'_id': id}, payload);
+                        await item.save();
+                        res.send({message: 'Campaign saved'});
+                        break;
+                    case 'Quest':
+                        const quest = await Quest.findOneAndUpdate({'_id': id}, payload);
+                        await quest.save();
+                        res.send({message: 'Campaign saved'});
+                        break;
+                    case 'World':
+                        const world = await World.findOneAndUpdate({'_id': id}, payload);
+                        await world.save();
+                        res.send({message: 'Campaign saved'});
+                        break;
+                    default:
+                        res.status(404).send({error: 'Type not supported'});
+                        break;
+                }
+            } catch {
+                res.status(400).send({message: "Couldn't save"})
+            }
+        })
+
         // Adds object to database
         app.post('/add', jsonParser, async (req, res, e) => {
             const payload = req.body;

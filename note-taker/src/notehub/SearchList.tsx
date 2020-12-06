@@ -105,7 +105,7 @@ export default function SearchList(props: {list: (ICampaign | ICharacter | IGrou
             <SearchBar>
                 <button id='addButton' onClick={() => setPopup(true)}>Add {props.type}</button>
                 {popup?(
-                    <Popup handleClose={handleClose}><CharacterForm handleClose={handleClose}/></Popup>
+                    <Popup setPopup={setPopup}><CharacterForm handleClose={handleClose}/></Popup>
                 ):null}
             </SearchBar>
         </Root>

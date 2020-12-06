@@ -29,7 +29,7 @@ export default function Homepage() {
     const [selectedCampaign, setSelectedCampaign] = useRecoilState(selectedCampaignState);
     return (
         <div>
-            <StyledLink to='admintool'>
+            <StyledLink color='white' to='admintool'>
                 <CampaignCard>Admin</CampaignCard>
             </StyledLink>
             <CampaignDisplay>

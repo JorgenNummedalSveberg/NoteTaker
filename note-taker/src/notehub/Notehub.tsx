@@ -22,7 +22,7 @@ export default function Notehub() {
     return (
         <div>
             <Header>
-                <StyledLink to='/'>Back to homepage</StyledLink>
+                <StyledLink color='white' to='/'>Back to homepage</StyledLink>
                 {selectedCampaign.name}
             </Header>
             <Lists>

@@ -44,3 +44,14 @@ export function add(payload: ICampaign | ICharacter | IGroup | IItem | IQuest | 
 
     fetch('http://localhost:5000/add?type='+type, req);
 }
+export function edit(payload: any, type: string, id: string) {
+    const req = ({
+        method: 'PUT',
+        body: JSON.stringify(payload),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    fetch('http://localhost:5000/edit?type='+type+'&id='+id, req);
+}

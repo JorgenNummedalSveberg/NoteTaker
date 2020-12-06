@@ -25,7 +25,7 @@ export default function CharacterForm(props: {handleClose: () => void}) {
             <input type="text" value={socialStatus} onChange={e => setSocialStatus(e.target.value)} placeholder='Beggar, king, etc...'/><br/>
             <label htmlFor="wealth">Wealth</label><br/>
             <input type="text" value={wealth} onChange={e => setWealth(e.target.value)} placeholder='poor'/><br/>
-            <input type="submit" onClick={handleSubmit} value="Create"/>
+            <input type="button" onClick={handleSubmit} value="Create"/>
         </form>
     )
 }

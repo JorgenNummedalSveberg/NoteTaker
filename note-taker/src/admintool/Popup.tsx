@@ -12,7 +12,6 @@ const Background = styled.div`
 `;
 const PopupBox = styled.div`
     position: fixed;
-    z-index: 101;
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -20,7 +19,7 @@ const PopupBox = styled.div`
 `;
 const Dialogue = styled.div`
     background-color: white;
-    z-index: 110;
+    z-index: 101;
     padding: 20px;
     border-radius: 10px;
 `;
@@ -29,12 +28,12 @@ const PopupGrid = styled.div`
     justify-content: center;
     padding: 200px;
 `;
-export default function Popup(props: {children: JSX.Element | JSX.Element[], handleClose:() => void}) {
+export default function Popup(props: {children: JSX.Element | JSX.Element[], setPopup:(boolean: boolean) => void}) {
     return (
         <div>
-            <Background onClick={()=> props.handleClose}></Background>
             <PopupBox>
                 <PopupGrid>
+                    <Background onClick={() => props.setPopup(false)}></Background>
                     <Dialogue>{props.children}</Dialogue>
                 </PopupGrid>
             </PopupBox>

@@ -18,11 +18,10 @@ import {
 } from "../recoil/atoms";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
-import CharacterForm from "./CharacterForm";
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)<{color: string}>`
     text-decoration: none;
-    color: white;
+    color: ${props => props.color};
 `;
 
 export default function Admintool() {
@@ -52,7 +51,7 @@ export default function Admintool() {
     }
     return(
         <div>
-            <StyledLink to='/'>Back to homepage</StyledLink>
+            <StyledLink color='white' to='/'>Back to homepage</StyledLink>
             <select onChange={(e) => setSelectedCampaign(campaigns.filter((c: ICampaign) => c._id === e.target.value)[0])}>
                 <option value={undefined}>Select campaign</option>
                 {campaigns.map((campaign: ICampaign) => <option value={campaign._id}>{campaign.name}</option>)}
