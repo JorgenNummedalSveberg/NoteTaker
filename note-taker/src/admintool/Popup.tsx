@@ -29,6 +29,13 @@ const PopupGrid = styled.div`
     padding: 200px;
 `;
 export default function Popup(props: {children: JSX.Element | JSX.Element[], setPopup:(boolean: boolean) => void}) {
+    document.addEventListener("keydown", handleClose, false)
+    function handleClose(event: { key: string; }) {
+        if (event.key === 'Escape') {
+            props.setPopup(false);
+            document.removeEventListener("keydown", handleClose, false);
+        }
+    }
     return (
         <div>
             <PopupBox>
