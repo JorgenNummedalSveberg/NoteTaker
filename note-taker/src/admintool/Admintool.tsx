@@ -82,10 +82,6 @@ export default function Admintool() {
                 fetchAll(setState);
             }}>Add campaign</button>
             <button onClick={() => {
-                add(newGroup(worldInput), 'Group');
-                fetchAll(setState);
-            }}>Add group</button>
-            <button onClick={() => {
                 add(newItem(worldInput), 'Item');
                 fetchAll(setState);
             }}>Add item</button>

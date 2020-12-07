@@ -14,6 +14,7 @@ import {fetchAll} from "../worldBuildingService";
 import {useRecoilState} from "recoil";
 import {campaignState, characterState, groupState, itemState, questState, worldState} from "../recoil/atoms";
 import CharacterEditor from "../editors/CharacterEditor";
+import GroupEditor from "../editors/GroupEditor";
 
 export const ListCard = styled.div`
     width: 450px;
@@ -77,7 +78,13 @@ export function CharacterCard(props: {character: ICharacter}) {
 
 export function GroupCard(props: {group: IGroup}) {
     return(
-        <ListCard><p>hello</p></ListCard>
+        <ListCard>
+            <h3>{props.group.name}</h3>
+            <p>{props.group.description}</p>
+            <p>{props.group.socialStatus}</p>
+            <p>{props.group.wealth}</p>
+            <EditButton subject={props.group} Element={GroupEditor}/>
+        </ListCard>
     )
 }
 export function ItemCard(props: {item: IItem}) {

@@ -16,22 +16,22 @@ export interface IGroup {
     questsParticipated: string[] // Quests they have themselves taken apart in
 }
 
-export function newGroup(name: string): IGroup {
+export function newGroup(name: string, description: string, socialStatus: string, wealth: string, campaign: string): IGroup {
     return {
         _id: '',
         aliases: [],
-        campaigns: [],
+        campaigns: [campaign],
         characters: [],
-        description: "",
+        description: description,
         items: [],
         name: name,
         negativeStanding: [],
         positiveStanding: [],
         questsGiven: [],
         questsParticipated: [],
-        socialStatus: "",
+        socialStatus: socialStatus,
         specialTraits: [],
         thoughtsSurrounding: [],
-        wealth: ""
+        wealth: wealth
     }
 }

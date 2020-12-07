@@ -56,7 +56,11 @@ function Divider() {
     )
 }
 
-export default function SearchList(props: {list: (ICampaign | ICharacter | IGroup | IItem | IQuest | IWorld)[], type: string}) {
+export default function SearchList(props: {
+    list: (ICampaign | ICharacter | IGroup | IItem | IQuest | IWorld)[];
+    type: string;
+    Form:  (props: { handleClose: () => void; }) => JSX.Element
+}) {
     const [input, setInput] = useState('');
     const [popup, setPopup] = useState(false);
     const [worldInput, setWorldInput] = useState('');
@@ -131,9 +135,8 @@ export default function SearchList(props: {list: (ICampaign | ICharacter | IGrou
             <Divider/>
             <SearchBar>
                 <button id='addButton' onClick={() => setPopup(true)}>Add {props.type}</button>
-                {popup?(
-                    <Popup setPopup={setPopup}><CharacterForm handleClose={handleClose}/></Popup>
-                ):null}
+                {popup?
+                    <Popup setPopup={setPopup}><props.Form handleClose={handleClose}/></Popup>:null}
             </SearchBar>
         </Root>
     )

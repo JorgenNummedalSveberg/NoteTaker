@@ -5,6 +5,8 @@ import {StyledLink} from "../admintool/Admintool";
 import SearchList from "./SearchList";
 import {campaignFilter, inCampaign} from "../recoil/selectors";
 import styled from "styled-components";
+import CharacterForm from "../admintool/CharacterForm";
+import GroupForm from "../admintool/GroupForm";
 
 const Lists = styled.div`
     display: flex;
@@ -27,10 +29,8 @@ export default function Notehub() {
                 <h1>{selectedCampaign.name}</h1>
             </Header>
             <Lists>
-                <SearchList list={elements.characters} type='Character'/>
-                <SearchList list={elements.groups} type='Group'/>
-                <SearchList list={elements.items} type='Item'/>
-                <SearchList list={elements.quests} type='Quest'/>
+                <SearchList Form={CharacterForm} list={elements.characters} type='Character'/>
+                <SearchList Form={GroupForm} list={elements.groups} type='Group'/>
             </Lists>
         </div>
     )
