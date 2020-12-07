@@ -34,8 +34,8 @@ export default function Homepage() {
             </StyledLink>
             <CampaignDisplay>
                 {campaigns.map((campaign: ICampaign) => (
-                    <Link to="notehub" >
-                        <CampaignCard onClick={()=>setSelectedCampaign(campaign)}>{campaign.name}</CampaignCard>
+                    <Link to="notehub">
+                        <CampaignCard onClick={() => setSelectedCampaign(campaign)}>{campaign.name}</CampaignCard>
                     </Link>
                 ))}
             </CampaignDisplay>

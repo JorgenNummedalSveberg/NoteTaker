@@ -1,31 +1,29 @@
 import {selectedCampaignState} from "../recoil/atoms";
 import {useRecoilValue} from "recoil";
-import React, {useState} from "react";
+import React, {useContext, useRef} from "react";
 import {add} from "../worldBuildingService";
-import {newCharacter} from "../types/Character";
-import {newGroup} from "../types/Group";
+import {APIContext} from "../App";
+import {newItem} from "../types/Item";
 
-export default function GroupForm(props: {handleClose: () => void}) {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [socialStatus, setSocialStatus] = useState('');
-    const [wealth, setWealth] = useState('');
+export default function ItemForm(props: { handleClose: () => void }) {
     const campaign = useRecoilValue(selectedCampaignState);
+    const nameInput = useRef<HTMLInputElement>(null);
+    const descriptionInput = useRef<HTMLTextAreaElement>(null);
+    const update = useContext(APIContext);
 
     function handleSubmit() {
-        add(newGroup(name, description, socialStatus, wealth, campaign._id), 'Group');
-        props.handleClose();
+        if (descriptionInput.current && nameInput.current) {
+            add(newItem(nameInput.current.value, descriptionInput.current.value, campaign._id), 'Item', update);
+            props.handleClose();
+        }
     }
+
     return (
         <form>
             <label htmlFor="name">Name</label><br/>
-            <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder='The Beatles'/><br/>
+            <input ref={nameInput} type="text" placeholder='Ice breaker'/><br/>
             <label htmlFor="description">Description</label><br/>
-            <input type="text" value={description} onChange={e => setDescription(e.target.value)} placeholder='Make good music'/><br/>
-            <label htmlFor="socialStatus">Social status</label><br/>
-            <input type="text" value={socialStatus} onChange={e => setSocialStatus(e.target.value)} placeholder='Musicians'/><br/>
-            <label htmlFor="wealth">Wealth</label><br/>
-            <input type="text" value={wealth} onChange={e => setWealth(e.target.value)} placeholder='poor?'/><br/>
+            <textarea rows={5} cols={50} ref={descriptionInput} placeholder='Can be used as a joke or to call forth Ragnarock'/><br/>
             <input type="button" onClick={handleSubmit} value="Create"/>
         </form>
     )

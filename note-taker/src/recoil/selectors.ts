@@ -5,7 +5,6 @@ import {ICampaign} from "../types/Campaign";
 import {IGroup} from "../types/Group";
 import {IItem} from "../types/Item";
 import {IQuest} from "../types/Quest";
-import React from 'react';
 
 export const campaignFilter = selector({
     key: 'campaignFilter',

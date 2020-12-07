@@ -5,6 +5,6 @@ export interface IItem {
     campaigns: string[] // Campaigns the item has appeared in
 }
 
-export function newItem(name: string): IItem {
-    return {_id: '', campaigns: [], description: "", name: name}
+export function newItem(name: string, description: string, campaign: string): IItem {
+    return {_id: '', campaigns: [campaign], description: description, name: name}
 }

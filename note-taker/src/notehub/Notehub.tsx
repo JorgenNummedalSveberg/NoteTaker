@@ -1,12 +1,13 @@
 import {useRecoilState, useRecoilValue} from "recoil";
-import {characterState, selectedCampaignState} from "../recoil/atoms";
+import {selectedCampaignState} from "../recoil/atoms";
 import React from "react";
 import {StyledLink} from "../admintool/Admintool";
 import SearchList from "./SearchList";
-import {campaignFilter, inCampaign} from "../recoil/selectors";
+import {campaignFilter} from "../recoil/selectors";
 import styled from "styled-components";
 import CharacterForm from "../admintool/CharacterForm";
 import GroupForm from "../admintool/GroupForm";
+import ItemForm from "../admintool/ItemForm";
 
 const Lists = styled.div`
     display: flex;
@@ -31,6 +32,7 @@ export default function Notehub() {
             <Lists>
                 <SearchList Form={CharacterForm} list={elements.characters} type='Character'/>
                 <SearchList Form={GroupForm} list={elements.groups} type='Group'/>
+                <SearchList Form={ItemForm} list={elements.items} type='Item'/>
             </Lists>
         </div>
     )

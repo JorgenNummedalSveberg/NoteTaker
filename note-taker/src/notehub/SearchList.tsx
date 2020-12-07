@@ -6,12 +6,11 @@ import {IQuest} from "../types/Quest";
 import {IItem} from "../types/Item";
 import {IGroup} from "../types/Group";
 import {CampaignCard, CharacterCard, GroupCard, ItemCard, ListCard, QuestCard, WorldCard} from "./ListCard";
-import React, {useState} from "react";
-import CharacterForm from "../admintool/CharacterForm";
+import React, {useContext, useState} from "react";
 import Popup from "../admintool/Popup";
-import {fetchAll} from "../worldBuildingService";
 import {useRecoilState} from "recoil";
 import {campaignState, characterState, groupState, itemState, questState, worldState} from "../recoil/atoms";
+import {APIContext} from "../App";
 
 const Root = styled.div`
     width: 500px;
@@ -52,6 +51,7 @@ const Header = styled.div`
     text-align: center;
     font-size: 32px;
 `;
+
 function Divider() {
     return (
         <DividerContainer>
@@ -63,7 +63,7 @@ function Divider() {
 export default function SearchList(props: {
     list: (ICampaign | ICharacter | IGroup | IItem | IQuest | IWorld)[];
     type: string;
-    Form:  (props: { handleClose: () => void; }) => JSX.Element
+    Form: (props: { handleClose: () => void; }) => JSX.Element
 }) {
     const [input, setInput] = useState('');
     const [popup, setPopup] = useState(false);
@@ -74,8 +74,9 @@ export default function SearchList(props: {
     const [items, setItems] = useRecoilState(itemState);
     const [quests, setQuests] = useRecoilState(questState);
     const [worlds, setWorlds] = useRecoilState(worldState);
+    const update: any = useContext(APIContext);
 
-    function setState(state: {campaigns:  [], characters: [], groups: [], items: [], quests: [], worlds: []}) {
+    function setState(state: { campaigns: [], characters: [], groups: [], items: [], quests: [], worlds: [] }) {
         setCampaigns(state.campaigns);
         setCharacters(state.characters);
         setGroups(state.groups);
@@ -83,17 +84,17 @@ export default function SearchList(props: {
         setQuests(state.quests);
         setWorlds(state.worlds);
     }
+
     function handleClose() {
         setPopup(false);
-        fetchAll(setState);
     }
 
     function compare(string: string): boolean {
-        console.log(string);
         if (string.toLowerCase().includes(input.toLowerCase())) {
             return true;
         } else return false;
     }
+
     function search(element: any) {
         let returnBool = false;
         Object.entries(element).forEach((prop: any) => {
@@ -101,9 +102,9 @@ export default function SearchList(props: {
                 if (compare(prop)) {
                     returnBool = true;
                 }
-            } else if(Array.isArray(prop)) {
+            } else if (Array.isArray(prop)) {
                 prop.forEach(e => {
-                    if (typeof e === 'string' && compare(e)){
+                    if (typeof e === 'string' && compare(e)) {
                         returnBool = true;
                     }
                 })
@@ -111,8 +112,9 @@ export default function SearchList(props: {
         })
         return returnBool;
     }
+
     const list = props.list.filter(element => search(element));
-    return(
+    return (
         <Root>
             <Header>{props.type}s</Header>
             <SearchBar>
@@ -140,8 +142,10 @@ export default function SearchList(props: {
             <Divider/>
             <SearchBar>
                 <button id='addButton' onClick={() => setPopup(true)}>Add {props.type}</button>
-                {popup?
-                    <Popup setPopup={setPopup}><props.Form handleClose={handleClose}/></Popup>:null}
+                {popup ?
+                    <Popup setPopup={setPopup}>
+                        <props.Form handleClose={handleClose}/>
+                    </Popup> : null}
             </SearchBar>
         </Root>
     )
