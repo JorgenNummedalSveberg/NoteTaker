@@ -68,9 +68,9 @@ export function CharacterCard(props: {character: ICharacter}) {
     return(
         <ListCard>
             <h3>{props.character.name}</h3>
-            <p>{props.character.description}</p>
-            <p>{props.character.socialStatus}</p>
-            <p>{props.character.wealth}</p>
+            <p>Description: {props.character.description}</p>
+            <p>Social status/work: {props.character.socialStatus}</p>
+            <p>Wealth: {props.character.wealth}</p>
             <EditButton subject={props.character} Element={CharacterEditor}/>
         </ListCard>
     )
@@ -80,9 +80,9 @@ export function GroupCard(props: {group: IGroup}) {
     return(
         <ListCard>
             <h3>{props.group.name}</h3>
-            <p>{props.group.description}</p>
-            <p>{props.group.socialStatus}</p>
-            <p>{props.group.wealth}</p>
+            <p>Description: {props.group.description}</p>
+            <p>Social status/work: {props.group.socialStatus}</p>
+            <p>Wealth: {props.group.wealth}</p>
             <EditButton subject={props.group} Element={GroupEditor}/>
         </ListCard>
     )

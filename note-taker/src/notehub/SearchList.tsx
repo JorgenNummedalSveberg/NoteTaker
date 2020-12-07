@@ -20,7 +20,7 @@ const Root = styled.div`
 `;
 const List = styled.div`
     width: 500px;
-    height: 350px;
+    height: 500px;
     overflow-x: hidden;
     overflow-y: scroll;
     display: flex;
@@ -47,6 +47,10 @@ const Line = styled.div`
     background-color: black;
     height: 1px;
     width: 450px;
+`;
+const Header = styled.div`
+    text-align: center;
+    font-size: 32px;
 `;
 function Divider() {
     return (
@@ -110,6 +114,7 @@ export default function SearchList(props: {
     const list = props.list.filter(element => search(element));
     return(
         <Root>
+            <Header>{props.type}s</Header>
             <SearchBar>
                 <input id='searchbar' value={input} onChange={e => setInput(e.target.value)}/>
             </SearchBar>
