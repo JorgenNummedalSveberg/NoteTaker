@@ -8,12 +8,13 @@ import styled from "styled-components";
 
 const Lists = styled.div`
     display: flex;
-    justify-content: center;we
+    justify-content: center;
     flex-wrap: wrap;
 `;
 
 const Header = styled.div`
     text-align: center;
+    color: white;
 `;
 
 export default function Notehub() {
@@ -23,10 +24,13 @@ export default function Notehub() {
         <div>
             <Header>
                 <StyledLink color='white' to='/'>Back to homepage</StyledLink>
-                {selectedCampaign.name}
+                <h1>{selectedCampaign.name}</h1>
             </Header>
             <Lists>
                 <SearchList list={elements.characters} type='Character'/>
+                <SearchList list={elements.groups} type='Group'/>
+                <SearchList list={elements.items} type='Item'/>
+                <SearchList list={elements.quests} type='Quest'/>
             </Lists>
         </div>
     )

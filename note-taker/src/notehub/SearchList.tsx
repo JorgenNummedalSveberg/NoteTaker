@@ -20,12 +20,14 @@ const Root = styled.div`
 `;
 const List = styled.div`
     width: 500px;
-    height: 500px;
+    height: 350px;
     overflow-x: hidden;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-bottom: solid black 1px;
+    border-top: solid black 1px;
 `;
 const SearchBar = styled.div`
     width: 500px;
@@ -39,6 +41,7 @@ const DividerContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    padding: 10px 0 10px 0;
 `;
 const Line = styled.div`
     background-color: black;
@@ -76,7 +79,31 @@ export default function SearchList(props: {list: (ICampaign | ICharacter | IGrou
         setPopup(false);
         fetchAll(setState);
     }
-    const list = props.list.filter(element => element.name.toLowerCase().includes(input.toLowerCase()));
+
+    function compare(string: string): boolean {
+        console.log(string);
+        if (string.toLowerCase().includes(input.toLowerCase())) {
+            return true;
+        } else return false;
+    }
+    function search(element: any) {
+        let returnBool = false;
+        Object.entries(element).forEach((prop: any) => {
+            if (typeof prop === 'string') {
+                if (compare(prop)) {
+                    returnBool = true;
+                }
+            } else if(Array.isArray(prop)) {
+                prop.forEach(e => {
+                    if (typeof e === 'string' && compare(e)){
+                        returnBool = true;
+                    }
+                })
+            }
+        })
+        return returnBool;
+    }
+    const list = props.list.filter(element => search(element));
     return(
         <Root>
             <SearchBar>
