@@ -39,6 +39,7 @@ export default function CharacterEditor(props: { subject: ICharacter | IGroup, h
             <textarea rows={5} cols={50} defaultValue={props.subject.description} ref={descriptionInput}/><br/>
             <label htmlFor="socialStatus">Social status</label><br/>
             <input defaultValue={props.subject.socialStatus} ref={socialInput} type="text"/><br/>
+            <label htmlFor="wealth">Wealth</label><br/>
             <select defaultValue={props.subject.wealth} ref={wealthInput}>
                 <option value='Unknown'>Unknown</option>
                 <option value='Poor'>Poor</option>

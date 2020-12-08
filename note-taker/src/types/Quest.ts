@@ -13,18 +13,18 @@ export interface IQuest {
     campaigns: string[] // Campaign the quest happened in
 }
 
-export function newQuest(name: string): IQuest {
+export function newQuest(name: string, giver: string, goldReward: string, description: string, objective: string, campaign: string): IQuest {
     return {
         _id: '',
         benefits: [],
-        campaigns: [],
-        description: "",
+        campaigns: [campaign],
+        description: description,
         downsides: [],
-        giver: "",
-        goldReward: "",
+        giver: giver,
+        goldReward: goldReward,
         itemReward: [],
         name: name,
-        objective: "",
+        objective: objective,
         places: [],
         takers: []
     }

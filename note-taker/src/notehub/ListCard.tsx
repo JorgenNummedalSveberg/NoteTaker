@@ -11,6 +11,8 @@ import {deleteSubject} from "../worldBuildingService";
 import CharacterEditor from "../editors/CharacterEditor";
 import {APIContext} from "../App";
 import ItemForm from "../admintool/ItemForm";
+import {useRecoilValue} from "recoil";
+import {characterState} from "../recoil/atoms";
 
 export const ListCard = styled.div`
     width: 450px;
@@ -100,15 +102,22 @@ export function ItemCard(props: { item: IItem }) {
         <ListCard>
             <h3>{props.item.name}</h3>
             <p>Description: {props.item.description}</p>
-            <EditButton type={'Item'} subject={props.item} Element={ItemForm}/>
             <DeleteButton type={'Item'} id={props.item._id}/>
         </ListCard>
     )
 }
 
 export function QuestCard(props: { quest: IQuest }) {
+    const characters = useRecoilValue(characterState);
+    const giver: ICharacter = characters.filter((x: ICharacter) => x._id === props.quest.giver)[0];
     return (
-        <ListCard><p>hello</p></ListCard>
+        <ListCard>
+            <h3>{props.quest.name}</h3>
+            <p>Quest giver: {giver.name}</p>
+            <p>Gold reward: {props.quest.goldReward}</p>
+            <p>Objective: {props.quest.objective}</p>
+            <DeleteButton type={'Quest'} id={props.quest._id}/>
+        </ListCard>
     )
 }
 

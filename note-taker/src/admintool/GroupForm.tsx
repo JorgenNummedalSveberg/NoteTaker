@@ -28,6 +28,7 @@ export default function GroupForm(props: { handleClose: () => void }) {
             <textarea rows={5} cols={50} ref={descriptionInput} placeholder='Make good music'/><br/>
             <label htmlFor="socialStatus">Social status</label><br/>
             <input ref={socialInput} type="text" placeholder='Musicians'/><br/>
+            <label htmlFor="wealth">Wealth</label><br/>
             <select ref={wealthInput}>
                 <option value='Unknown'>Unknown</option>
                 <option value='Poor'>Poor</option>

@@ -28,6 +28,7 @@ export default function CharacterForm(props: { handleClose: () => void }) {
             <textarea rows={5} cols={50} ref={descriptionInput} placeholder='Is an asshole who wears blue coats'/><br/>
             <label htmlFor="socialStatus">Social status</label><br/>
             <input ref={socialInput} type="text" placeholder='Beggar, king, etc...'/><br/>
+            <label htmlFor="wealth">Wealth</label><br/>
             <select ref={wealthInput}>
                 <option value='Unknown'>Unknown</option>
                 <option value='Poor'>Poor</option>

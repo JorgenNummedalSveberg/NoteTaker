@@ -8,6 +8,7 @@ import styled from "styled-components";
 import CharacterForm from "../admintool/CharacterForm";
 import GroupForm from "../admintool/GroupForm";
 import ItemForm from "../admintool/ItemForm";
+import QuestForm from "../admintool/QuestForm";
 
 const Lists = styled.div`
     display: flex;
@@ -33,6 +34,7 @@ export default function Notehub() {
                 <SearchList Form={CharacterForm} list={elements.characters} type='Character'/>
                 <SearchList Form={GroupForm} list={elements.groups} type='Group'/>
                 <SearchList Form={ItemForm} list={elements.items} type='Item'/>
+                <SearchList Form={QuestForm} list={elements.quests} type='Quest'/>
             </Lists>
         </div>
     )

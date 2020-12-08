@@ -86,11 +86,6 @@ export default function Admintool() {
             }}>Add campaign
             </button>
             <button onClick={() => {
-                add(newQuest(worldInput), 'Quest', update);
-                update.quest();
-            }}>Add quest
-            </button>
-            <button onClick={() => {
                 add(newWorld(worldInput), 'World', update);
                 update.world();
             }}>Add world
