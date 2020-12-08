@@ -16,10 +16,10 @@ export interface ICharacter {
     questsParticipated: string[] // Quests they have themselves taken apart in
 }
 
-export function newCharacter(name: string, description: string, socialStatus: string, wealth: string, campaign: string): ICharacter {
+export function newCharacter(name: string, alias: string[], description: string, socialStatus: string, wealth: string, campaign: string): ICharacter {
     return {
         _id: '',
-        aliases: [],
+        aliases: alias,
         campaigns: [campaign],
         description: description,
         groups: [],

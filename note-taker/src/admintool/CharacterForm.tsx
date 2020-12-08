@@ -7,27 +7,44 @@ import {APIContext} from "../App";
 
 export default function CharacterForm(props: { handleClose: () => void }) {
     const campaign = useRecoilValue(selectedCampaignState);
+
     const nameInput = useRef<HTMLInputElement>(null);
+
+    const aliasInput = useRef<HTMLInputElement>(null);
+    const alias: string[] = [];
+    function handleAlias() {if(aliasInput.current && aliasInput.current.value !== ''){alias.push(aliasInput.current.value)}}
+
     const descriptionInput = useRef<HTMLTextAreaElement>(null);
+
     const socialInput = useRef<HTMLInputElement>(null);
+
     const wealthInput = useRef<HTMLSelectElement>(null);
+
     const update = useContext(APIContext);
 
     function handleSubmit() {
         if (wealthInput.current && descriptionInput.current && socialInput.current && nameInput.current) {
-            add(newCharacter(nameInput.current.value, descriptionInput.current.value, socialInput.current.value, wealthInput.current.value, campaign._id), 'Character', update);
+            add(newCharacter(nameInput.current.value, alias, descriptionInput.current.value, socialInput.current.value, wealthInput.current.value, campaign._id), 'Character', update);
             props.handleClose();
         }
     }
+
 
     return (
         <form>
             <label htmlFor="name">Name</label><br/>
             <input ref={nameInput} type="text" placeholder='John Doe'/><br/>
+
+            <label htmlFor="aliases">Aliases</label><br/>
+            <input ref={aliasInput} type="text" placeholder='Dickhead'/>
+            <button type="button" onClick={handleAlias}>Add alias</button><br/>
+
             <label htmlFor="description">Description</label><br/>
             <textarea rows={5} cols={50} ref={descriptionInput} placeholder='Is an asshole who wears blue coats'/><br/>
+
             <label htmlFor="socialStatus">Social status</label><br/>
             <input ref={socialInput} type="text" placeholder='Beggar, king, etc...'/><br/>
+
             <label htmlFor="wealth">Wealth</label><br/>
             <select ref={wealthInput}>
                 <option value='Unknown'>Unknown</option>

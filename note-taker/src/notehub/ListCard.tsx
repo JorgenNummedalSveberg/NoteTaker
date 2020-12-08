@@ -75,6 +75,7 @@ export function CharacterCard(props: { character: ICharacter }) {
     return (
         <ListCard>
             <h3>{props.character.name}</h3>
+            <p>Aliases: {props.character.aliases.join(', ')}</p>
             <p>Description: {props.character.description}</p>
             <p>Social status/work: {props.character.socialStatus}</p>
             <p>Wealth: {props.character.wealth}</p>
