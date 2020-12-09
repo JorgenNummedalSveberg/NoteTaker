@@ -10,20 +10,30 @@ import React, {useContext, useState} from "react";
 import {deleteSubject} from "../worldBuildingService";
 import CharacterEditor from "../editors/CharacterEditor";
 import {APIContext} from "../App";
-import ItemForm from "../admintool/ItemForm";
 import {useRecoilValue} from "recoil";
 import {characterState} from "../recoil/atoms";
 
-export const ListCard = styled.div`
+export const ListCardRoot = styled.div`
     width: 450px;
-    background-color: white;
     border-radius: 5px;
     border: solid black 1px;
     margin: 10px;
     padding: 10px;
 `;
 
-function EditButton(props: { Element: (props: any) => JSX.Element, subject: any, type: string }) {
+function ListCard(props:
+  {title: string, subject: any, children: JSX.Element | JSX.Element[], edit?: boolean, delete?: boolean, type: string}){
+    return (
+        <ListCardRoot>
+            <h3>{props.title}</h3>
+            {props.children}
+            {props.edit?<EditButton type={props.type} subject={props.subject}/>:null}
+            {props.delete?<DeleteButton type={props.type} id={props.subject._id}/>:null}
+        </ListCardRoot>
+    )
+}
+
+function EditButton(props: {subject: any, type: string }) {
 
     const [popup, setPopup] = useState(false);
 
@@ -31,12 +41,28 @@ function EditButton(props: { Element: (props: any) => JSX.Element, subject: any,
         setPopup(false);
     }
 
+    let editor;
+    switch(props.type){
+        case 'Character':
+            editor = <CharacterEditor subject={props.subject} type={props.type} handleClose={handleClose}/>
+            break;
+        case 'Group':
+            editor = <CharacterEditor subject={props.subject} type={props.type} handleClose={handleClose}/>
+            break;
+        default:
+            editor = null
+            break;
+    }
+
     return (
         <div>
-            <button id='addButton' onClick={() => setPopup(true)}>Edit</button>
-            {popup ? (
+            <button id='addButton' onClick={() => {
+                console.log(props.type)
+                setPopup(true)
+            }}>Edit</button>
+            {popup && editor ? (
                 <Popup setPopup={setPopup}>
-                    <props.Element type={props.type} subject={props.subject} handleClose={handleClose}/>
+                    {editor}
                 </Popup>
             ) : null}
         </div>
@@ -58,6 +84,7 @@ function DeleteButton(props: { type: string, id: string }) {
             <button id='deleteButton' onClick={() => setPopup(true)}>Delete</button>
             {popup ? (
                 <Popup setPopup={setPopup}>
+                    <p>Are you sure you want to delete this {props.type}?</p>
                     <button onClick={handleClose}>Confirm</button>
                 </Popup>
             ) : null}
@@ -67,43 +94,36 @@ function DeleteButton(props: { type: string, id: string }) {
 
 export function CampaignCard(props: { campaign: ICampaign }) {
     return (
-        <ListCard><p>hello</p></ListCard>
+        <ListCard subject={props.campaign} title={props.campaign.name} type='Campaign' delete>
+        </ListCard>
     )
 }
 
 export function CharacterCard(props: { character: ICharacter }) {
     return (
-        <ListCard>
-            <h3>{props.character.name}</h3>
+        <ListCard title={props.character.name} type='Character' delete edit subject={props.character}>
             <p>Aliases: {props.character.aliases.join(', ')}</p>
             <p>Description: {props.character.description}</p>
             <p>Social status/work: {props.character.socialStatus}</p>
             <p>Wealth: {props.character.wealth}</p>
-            <EditButton type={'Character'} subject={props.character} Element={CharacterEditor}/>
-            <DeleteButton type={'Character'} id={props.character._id}/>
         </ListCard>
     )
 }
 
 export function GroupCard(props: { group: IGroup }) {
     return (
-        <ListCard>
-            <h3>{props.group.name}</h3>
+        <ListCard subject={props.group} title={props.group.name} edit delete type='Group'>
             <p>Description: {props.group.description}</p>
             <p>Social status/work: {props.group.socialStatus}</p>
             <p>Wealth: {props.group.wealth}</p>
-            <EditButton type={'Group'} subject={props.group} Element={CharacterEditor}/>
-            <DeleteButton type={'Group'} id={props.group._id}/>
         </ListCard>
     )
 }
 
 export function ItemCard(props: { item: IItem }) {
     return (
-        <ListCard>
-            <h3>{props.item.name}</h3>
+        <ListCard subject={props.item} title={props.item.name} type='Item' delete>
             <p>Description: {props.item.description}</p>
-            <DeleteButton type={'Item'} id={props.item._id}/>
         </ListCard>
     )
 }
@@ -112,18 +132,17 @@ export function QuestCard(props: { quest: IQuest }) {
     const characters = useRecoilValue(characterState);
     const giver: ICharacter = characters.filter((x: ICharacter) => x._id === props.quest.giver)[0];
     return (
-        <ListCard>
-            <h3>{props.quest.name}</h3>
+        <ListCard title={props.quest.name} type='Quest' delete subject={props.quest}>
             <p>Quest giver: {giver.name}</p>
             <p>Gold reward: {props.quest.goldReward}</p>
             <p>Objective: {props.quest.objective}</p>
-            <DeleteButton type={'Quest'} id={props.quest._id}/>
         </ListCard>
     )
 }
 
 export function WorldCard(props: { world: IWorld }) {
     return (
-        <ListCard><p>hello</p></ListCard>
+        <ListCard subject={props.world} title={props.world.name} type='World' delete>
+        </ListCard>
     )
 }
