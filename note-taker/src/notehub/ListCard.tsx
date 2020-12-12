@@ -12,6 +12,7 @@ import CharacterEditor from "../editors/CharacterEditor";
 import {APIContext} from "../App";
 import {useRecoilValue} from "recoil";
 import {characterState} from "../recoil/atoms";
+import {CharacterCreation} from "../admintool/CharacterCreation";
 
 export const ListCardRoot = styled.div`
     width: 450px;
@@ -106,6 +107,7 @@ export function CharacterCard(props: { character: ICharacter }) {
             <p>Description: {props.character.description}</p>
             <p>Social status/work: {props.character.socialStatus}</p>
             <p>Wealth: {props.character.wealth}</p>
+            <CharacterCreation/>
         </ListCard>
     )
 }

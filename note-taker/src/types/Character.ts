@@ -35,3 +35,23 @@ export function newCharacter(name: string, alias: string[], description: string,
         wealth: wealth,
     }
 }
+
+export function blankCharacter(campaign: string): ICharacter {
+    return {
+        _id: '',
+        aliases: [],
+        campaigns: [campaign],
+        description: '',
+        groups: [],
+        items: [],
+        name: '',
+        negativeStanding: [],
+        positiveStanding: [],
+        questsGiven: [],
+        questsParticipated: [],
+        socialStatus: '',
+        specialTraits: [],
+        thoughtsSurrounding: [],
+        wealth: '',
+    }
+}
