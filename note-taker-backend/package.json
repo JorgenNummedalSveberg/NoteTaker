@@ -21,7 +21,8 @@
   },
   "scripts": {
     "start": "ts-node index.ts",
-    "watch": "ts-node-dev index.ts --watch"
+    "watch": "ts-node-dev index.ts --watch",
+    "build": ""
   },
   "author": "",
   "license": "ISC"
