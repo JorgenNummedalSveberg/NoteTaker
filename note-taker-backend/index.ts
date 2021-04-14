@@ -19,7 +19,7 @@ mongoose
         const jsonParser = bodyParser.json()
         app.use(
             cors({
-                origin: 'http://localhost:3500',
+                origin: 'https://note-taker-git-deployment-yurgengrimwood.vercel.app:3500',
                 credentials: true,
             })
         );
