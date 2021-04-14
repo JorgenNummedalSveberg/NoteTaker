@@ -4,7 +4,7 @@ import {IGroup} from "../types/Group";
 import {IItem, newItem} from "../types/Item";
 import {IQuest, newQuest} from "../types/Quest";
 import {IWorld, newWorld} from "../types/World";
-import {add} from "../worldBuildingService";
+import {add, deleteSubject} from "../worldBuildingService";
 import React, {useContext, useState} from "react";
 import {useRecoilState} from "recoil";
 import {
@@ -51,6 +51,28 @@ export default function Admintool() {
         update.all();
         setFirst(false)
     }
+
+    function deleteEverything() {
+        for (let item in items) {
+            deleteSubject(items[item]["_id"], 'Item', update);
+        }
+        for (let character in characters) {
+            deleteSubject(characters[character]["_id"], 'Character', update);
+        }
+        for (let group in groups) {
+            deleteSubject(groups[group]["_id"], 'Group', update);
+        }
+        for (let quest in quests) {
+            deleteSubject(quests[quest]["_id"], 'Quest', update);
+        }
+        for (let campaign in campaigns) {
+            deleteSubject(campaigns[campaign]["_id"], 'Campaign', update);
+        }
+        for (let world in worlds) {
+            deleteSubject(worlds[world]["_id"], 'World', update);
+        }
+    }
+
     return (
         <div>
             <StyledLink color='white' to='/'>Back to homepage</StyledLink>
@@ -89,6 +111,11 @@ export default function Admintool() {
                 add(newWorld(worldInput), 'World', update);
                 update.world();
             }}>Add world
+            </button>
+            <button onClick={() => {
+                deleteEverything();
+                update.world();
+            }}>Wipe everything
             </button>
         </div>
     )

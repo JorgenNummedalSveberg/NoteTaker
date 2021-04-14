@@ -19,7 +19,7 @@ mongoose
         const jsonParser = bodyParser.json()
         app.use(
             cors({
-                origin: 'http://localhost:3000',
+                origin: 'http://localhost:3500',
                 credentials: true,
             })
         );
