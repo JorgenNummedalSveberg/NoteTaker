@@ -5,7 +5,7 @@ import {IItem} from "./types/Item";
 import {IQuest} from "./types/Quest";
 import {IGroup} from "./types/Group";
 
-const host = "https://note-taker-git-deployment-yurgengrimwood.vercel.app:5000"
+const host = "https://note-taker-backend-git-deployment-yurgengrimwood.vercel.app:5000"
 
 export function add(payload: ICampaign | ICharacter | IGroup | IItem | IQuest | IWorld, type: string, update: any) {
     const req = ({
