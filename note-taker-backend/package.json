@@ -20,9 +20,10 @@
     "ts-node-dev": "^1.0.0"
   },
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "node index.js",
+    "start-deploy": "node index.js",
     "watch": "ts-node-dev index.ts --watch",
-    "build": "cd ./"
+    "build": "tsc index.ts --outDir build"
   },
   "author": "",
   "license": "ISC"
